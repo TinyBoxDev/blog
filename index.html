@@ -1,22 +1,65 @@
 <!doctype html>
 <html ng-app>
   <head>
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <link href="_assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="_assets/js/jquery-1.9.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
   </head>
-  <body>
-    
+  <body ng-controller="RootController">
+    <div class="row">
+      <div class="span3">
+        <h2>Post list</h2>
+        <div ng-controller="PostListController">
+          <li ng-repeat="title in titleList">
+            <a href="#" ng-click="$emit('selectedPost', title)">{{title.title}}</a>
+          </li>
+        </div> <!-- controller -->
+      </div> <!-- span3 -->
 
+      <div class="span7">
+        <h2>Post view</h2>
+        <div ng-controller="PostController">
+          <h3>{{name}}</h3>
+          <p>{{body}}</p>
+        </div> <!-- controller -->
+      </div> <!-- span7 -->
+
+    </div> <!-- row -->
   </body>
-
-  <input type="button" onClick="start()" value="caca"/>
   
   <script>
-    var start = function() {
-    $.getJSON('_posts/plain.json', function(data) {
-    alert(data);
-    });
-    };
+    function PostListController($scope) {
+      
+       $scope.titleList = [];
+
+       $.getJSON('postList.json', function(data) {
+         $scope.$apply(function() {
+           $scope.titleList = data.list;
+         });
+       });
+    }
+
+    function PostController($scope) {
+      $scope.name = '';
+      $scope.body = '';
+      
+      $scope.$on('selectedPost2', function(event, args) {
+        $.getJSON('_posts/' + args.ref, function(data) {
+          $scope.$apply(function() {
+            console.log(data);
+            $scope.name = data.title;
+            $scope.body = data.body;
+          });
+        });
+      });
+   }
+
+     function RootController($scope) {
+       $scope.$on('selectedPost', function(event, args) {
+         console.log(args.ref);
+         $scope.$broadcast('selectedPost2', args);
+       });
+     }
   </script>
 
 </html>

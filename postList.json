@@ -1,0 +1,6 @@
+{"list" :
+  [
+    {"title" : "primo post", "ref" : "plain.json"},
+    {"title" : "secondo post", "ref" : "plain2.json"}
+  ]
+}
