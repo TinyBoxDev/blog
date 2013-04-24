@@ -4,7 +4,7 @@ function PostController($scope) {
   $scope.body = '';
 
   $scope.$on('selectedPost2', function(event, args) {
-    $getJSON('../posts' + args.ref, function(data){
+    $.getJSON('../posts/' + args.ref, function(data){
       $scope.$apply(function() {
         console.log(data);
         $scope.name = data.title;
