@@ -1,0 +1,116 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+  </head>
+  <body ng-controller="RootController">
+
+    <div class="container-narrow">
+      <div class="masterhead">
+        <h3 class="muted">All around the blog</h3>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="span3">
+          <h2>Post list</h2>
+          <div ng-controller="PostListController">
+            <li ng-repeat="title in titleList">
+              <a href="#" ng-click="$emit('selectedPost', title)">{{title.title}}</a>
+            </li>
+          </div> <!-- controller -->
+        </div> <!-- span3 -->
+
+        <div class="span7">
+          <div ng-controller="PostController">
+            <h2>{{name}}</h2>
+            <p>{{body}}</p>
+          </div> <!-- controller -->
+        </div> <!-- span7 -->
+
+      </div> <!-- row -->
+    </div>
+
+    <script src="../assets/js/jquery-1.9.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+    <script src="../controllers/PostListController.js"></script>
+    <script src="../controllers/PostController.js"></script>
+    <script src="../controllers/RootController.js"></script>
+  </body>
+  
+  <script>
+    /*
+    function PostListController($scope) {
+      
+       $scope.titleList = [];
+
+       $.getJSON('../posts/list.json', function(data) {
+         $scope.$apply(function() {
+           $scope.titleList = data.list;
+         });
+       });
+    }
+
+    function PostController($scope) {
+      $scope.name = '';
+      $scope.body = '';
+      
+      $scope.$on('selectedPost2', function(event, args) {
+        $.getJSON('../posts/' + args.ref, function(data) {
+          $scope.$apply(function() {
+            console.log(data);
+            $scope.name = data.title;
+            $scope.body = data.body;
+          });
+        });
+      });
+   }
+
+     function RootController($scope) {
+       $scope.$on('selectedPost', function(event, args) {
+         console.log(args.ref);
+         $scope.$broadcast('selectedPost2', args);
+       });
+     }
+    */
+  </script>
+
+</html>
