@@ -9,18 +9,18 @@ var argv = require('optimist')
   .describe('p', 'use <new> argument to create a new post!')
   .argv;
 
-var onNewPostInformationsReady = function(err, informations) {
-  if(err) throw err;
-
-  var onPostAdded = function(postInformations) {
-    console.log('blog.js'.rainbow + ': you can write your post in file\nposts/' + postInformations.ref);
+var promptForNewPostInformation = function() {
+  var onNewPostInformationsReady = function(err, informations) {
+    if(err) throw err;
+    
+    var onPostAdded = function(postInformations) {
+      console.log('blog.js'.rainbow + ': you can write your post in file\nposts/' + postInformations.ref);
+    }
+    
+    var list = PostList.create();
+    list.addNewPost(informations.title, onPostAdded);
   }
 
-  var list = PostList.create();
-  list.addNewPost(informations.title, onPostAdded);
-}
-
-var promptForNewPostInformation = function() {
   var schema = {
     properties: {
       title: {
@@ -29,6 +29,7 @@ var promptForNewPostInformation = function() {
       }
     }
   };
+
   prompt.start();
   console.log('blog.js'.rainbow + ': I suppose that you have many cool things to write');
   prompt.message = 'blog.js'.rainbow;
