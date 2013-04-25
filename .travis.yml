@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "0.8"
+branches:
+  only:
+    - master
+notifications:
+  recipients:
+    - boemianrapsodi@gmail.com
+    - b3by.in.th3.sky@gmail.com
+  email:
+    on_success: change
+    on_failure: always

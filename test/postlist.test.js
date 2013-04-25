@@ -1,9 +1,17 @@
 require('should');
+var fs = require('fs');
 var assert = require('assert');
 var PostList = require('../lib/postlist.js');
 
 describe('Post controller', function() {
-  beforeEach(function(done){ done(); });
+  
+  beforeEach(function(done){ 
+    fs.writeFile(__dirname + "/../tmp/index.json", "{}", function(err) {
+      if(err) throw err;
+      done();
+    });
+  });
+
   afterEach(function(done){ done(); });
   before(function(done){ done(); });
   after(function(done){ done(); });
@@ -17,8 +25,21 @@ describe('Post controller', function() {
 
   it('should add a new post', function(done) {
     var list = PostList.create();
-    list.addNewPost("new title", done);
-    //done();
+
+    var checkAdd = function(newItem) {
+      assert(newItem.title==="new title for add", "Returned object is invalid");
+      for(var itemKey in list.list) {
+        if(list.list[itemKey].title==="new title for add") {
+          done();
+        }
+      }
+    }
+
+    list.POSTS_DIR = __dirname + "/../tmp/";
+    list.INDEX_FILE_LOCATION = list.POSTS_DIR + "index.json";
+    list.list = require(list.INDEX_FILE_LOCATION);
+
+    list.addNewPost("new title for add", checkAdd);
   });
 
 });
