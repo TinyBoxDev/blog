@@ -1,6 +1,8 @@
 All over blog!
 ====
 
+Scripts build status: [![Build Status](https://travis-ci.org/TinyBoxDev/blog.png?branch=master)](https://travis-ci.org/TinyBoxDev/blog)
+
 Clone this repo in your gh-pages or in your Dropbox public folder and start blogging!
 
 ```
