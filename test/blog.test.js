@@ -7,6 +7,5 @@ describe('A blog application:\n', function() {
   before(function(done){ done(); });
   after(function(done){ done(); });
 
-  
 
 });
