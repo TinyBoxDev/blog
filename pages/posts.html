@@ -1,60 +1,61 @@
-<!doctype html>
-<html ng-app>
+
+<!DOCTYPE html>
+<html ng-app="postApp">
   <head>
-    <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <style type="text/css">
+    <script src="../assets/js/angular.js"></script>
+    <script src="../controllers/controllers.js"></script>
+    <meta charset="utf-8">
+    <title>Angular application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <style>
       body {
-        padding-top: 20px;
-        padding-bottom: 40px;
-      }
-
-      /* Custom container */
-      .container-narrow {
-        margin: 0 auto;
-        max-width: 700px;
-      }
-      .container-narrow > hr {
-        margin: 30px 0;
-      }
-
-      /* Main marketing message and sign up button */
-      .jumbotron {
-        margin: 60px 0;
-        text-align: center;
-      }
-      .jumbotron h1 {
-        font-size: 72px;
-        line-height: 1;
-      }
-      .jumbotron .btn {
-        font-size: 21px;
-        padding: 14px 24px;
-      }
-
-      /* Supporting marketing content */
-      .marketing {
-        margin: 60px 0;
-      }
-      .marketing p + h4 {
-        margin-top: 28px;
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
     </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
   </head>
+
   <body ng-controller="RootController">
 
-    <div class="container-narrow">
-      <div class="masterhead">
-        <h3 class="muted">All around the blog</h3>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Angular app</a>
+          <div class="nav-collapse collapse">
+          </div><!--/.nav-collapse -->
+        </div>
       </div>
+    </div>
 
-      <hr>
+    <div class="container">
 
-      <div class="row">
+       <div class="row">
         <div class="span3">
           <h2>Post list</h2>
           <div ng-controller="PostListController">
             <li ng-repeat="title in titleList">
-              <a href="#" ng-click="$emit('selectedPost', title)">{{title.title}}</a>
+              <a href="#" id="{{title.title}}" ng-click="$emit('postFromList', title)">{{title.title}}</a>
             </li>
           </div> <!-- controller -->
         </div> <!-- span3 -->
@@ -67,50 +68,11 @@
         </div> <!-- span7 -->
 
       </div> <!-- row -->
-    </div>
+
+    </div> <!-- /container -->
 
     <script src="../assets/js/jquery-1.9.1.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
-    <script src="../controllers/PostListController.js"></script>
-    <script src="../controllers/PostController.js"></script>
-    <script src="../controllers/RootController.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
+
   </body>
-  
-  <script>
-    /*
-    function PostListController($scope) {
-      
-       $scope.titleList = [];
-
-       $.getJSON('../posts/list.json', function(data) {
-         $scope.$apply(function() {
-           $scope.titleList = data.list;
-         });
-       });
-    }
-
-    function PostController($scope) {
-      $scope.name = '';
-      $scope.body = '';
-      
-      $scope.$on('selectedPost2', function(event, args) {
-        $.getJSON('../posts/' + args.ref, function(data) {
-          $scope.$apply(function() {
-            console.log(data);
-            $scope.name = data.title;
-            $scope.body = data.body;
-          });
-        });
-      });
-   }
-
-     function RootController($scope) {
-       $scope.$on('selectedPost', function(event, args) {
-         console.log(args.ref);
-         $scope.$broadcast('selectedPost2', args);
-       });
-     }
-    */
-  </script>
-
 </html>
